@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  /* reset css */
+}
+
+body {
+  text-align: center;
+  color: #c7e9f3;
+  background-color: #282c34;
+  font-size: calc(10px + 2vmin);
+
+  font-family: Carlito;
+}
+
+
+
+
+@font-face {
+  font-family: 'icomoon';
+  src: url(./fonts/icomoon.ttf) format('truetype'),
+  url("./fonts/icomoon.woff") format('woff')
+}
+
+@font-face {
+  font-family: 'lineficon';
+  src: url(./fonts/lineficon.ttf) format('truetype'),
+  url('./fonts/lineficon.woff') format('woff')
+}
+
+.font-left::before {
+  font-family: 'icomoon' !important;
+  display: block;
+}
+
+.font-right::before {
+  font-family: 'lineficon' !important;
+  display: block;
+}
