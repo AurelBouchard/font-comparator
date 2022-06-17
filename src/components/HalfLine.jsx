@@ -36,6 +36,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                                                    handleWheel(e, side, index, max, setIndex, () => updateGlyphIndex(side, font, contentIndex, setGlyphIndex)) :
                                                    handleWheel(e, side, index, max, setIndex, () => updateContentIndex(side, font, glyphIndex, setContentIndex))
                                            }}
+                                           style={style.btn}
                 /> : null }
                 
                 <div>
@@ -43,7 +44,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                         {side === "Right" ?
                             <div className={style.ico}>
                                 {font[side].orderedListOfContent[0] &&
-                                <span className={`ico_${Object.keys(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0]} font-${side} text-8xl`}/>
+                                <span className={`ico_${Object.keys(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0]} font-${side} iconic`}/>
                                 }
                             </div> : null }
                         <div className={style.content}
@@ -62,7 +63,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                         {side === "Left" ?
                             <div className={style.ico}>
                                 {font[side].orderedListOfContent[0] &&
-                                <span className={`ico_${Object.keys(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0]} font-${side} text-8xl`}/>
+                                <span className={`ico_${Object.keys(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0]} font-${side} iconic`}/>
                                 }
                             </div> : null }
                     </div>
@@ -74,7 +75,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                              }
                          }}
                     >
-                            <span>{font[side].orderedListOfGlyph[0] && (
+                            <span className={"glyph-name"}>{font[side].orderedListOfGlyph[0] && (
                                 cmd[side] === "content" && Object.values(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0] ||
                                 cmd[side] === "glyph" && Object.keys(JSON.parse(font[side].orderedListOfGlyph[glyphIndex[side]]))[0]
                             )}</span>
@@ -82,10 +83,10 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                 </div>
                 
                 {side === "Right" ? <UpDown side={side}
-                                           index={cmd[side] === "content" ? contentIndex[side] : glyphIndex[side]}
-                                           setIndex={cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side]}
-                                           max={font[side].orderedListOfContent.length - 1}
-                                           onWheel={(e) => {
+                                            index={cmd[side] === "content" ? contentIndex[side] : glyphIndex[side]}
+                                            setIndex={cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side]}
+                                            max={font[side].orderedListOfContent.length - 1}
+                                            onWheel={(e) => {
                                                let index = cmd[side] === "content" ? contentIndex[side] : glyphIndex[side];
                                                let setIndex = cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side];
                                                let max = font[side].orderedListOfContent.length - 1;
@@ -93,6 +94,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                                                    handleWheel(e, side, index, max, setIndex, () => updateGlyphIndex(side, font, contentIndex, setGlyphIndex)) :
                                                    handleWheel(e, side, index, max, setIndex, () => updateContentIndex(side, font, glyphIndex, setContentIndex))
                                            }}
+                                            style={style.btn}
                 /> : null }
             </div>
         </div>

@@ -1951,11 +1951,13 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
     const style = {
         leftPanel: "ml-[8vw] mr-[auto]",
         rightPanel: "ml-[auto] mr-[8vw]",
-        block: "border border-2 flex flex-row",
-        ico: "h-[12vw] w-[12vw] border border-2 flex justify-center items-center",
-        content: "h-[12vw] w-[20vw] border border-2 flex justify-center items-center",
-        name: "h-[4vw] w-[32vw] border border-2 flex items-center",
-        center: "flex justify-center items-center flex-1"
+        block: "border border-1 sm:border-2 flex flex-row",
+        ico: "h-[12vw] w-[12vw] border border-1 sm:border-2 flex justify-center items-center",
+        content: "h-[12vw] w-[20vw] border border-1 sm:border-2 flex justify-center items-center",
+        name: "h-[4vw] w-[32vw] border border-1 sm:border-2 flex items-center",
+        center: "flex justify-center items-center flex-1",
+        btn: "h-[8vw] w-[8vw] border border-1 sm:border-2 flex justify-center items-center"
+    
     }
     
     
