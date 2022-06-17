@@ -31,12 +31,12 @@ body {
   url('./fonts/lineficon.woff') format('woff')
 }
 
-.font-left::before {
+.font-Left::before {
   font-family: 'icomoon' !important;
   display: block;
 }
 
-.font-right::before {
+.font-Right::before {
   font-family: 'lineficon' !important;
   display: block;
 }

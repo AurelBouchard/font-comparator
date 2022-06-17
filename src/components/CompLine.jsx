@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import UpDown from "./UpDown";
 import {validateSide} from "../assets/utils/utils";
+import HalfLine from "./HalfLine";
 
 
 
 export default function CompLine({font, setter, contentIndex, setContentIndex, glyphIndex, setGlyphIndex, cmd, setCmd}) {
     const [updating, setUpdating] = useState(false)
-    
-    const center = "flex justify-center items-center flex-1";
     
     const updateGlyphIndex = (side, font, contentIndex, setGlyphIndex) => {
         console.log("update", side, "glyph with contentIndex :", contentIndex[side])
@@ -57,7 +56,6 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
         console.log("Right contentIndex :", contentIndex.Right)
         updateGlyphIndex("Right", font, contentIndex, setGlyphIndex)
     }, [contentIndex.Right])
-    
     
     
     async function onFontUpdate(side) {
@@ -1933,8 +1931,9 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
     
         // jobs done
         setUpdating(false);
-            
+        
     }
+    
     
     function compOrder(obj1,obj2) {
         let a = Object.keys(JSON.parse(obj1))[0].toString().toLowerCase();
@@ -1948,49 +1947,63 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
         }
     }
     
+    
     const style = {
-        leftPanel: "ml-[8vw]",
-        rightPanel: "mr-[8vw]",
+        leftPanel: "ml-[8vw] mr-[auto]",
+        rightPanel: "ml-[auto] mr-[8vw]",
         block: "border border-2 flex flex-row",
         ico: "h-[12vw] w-[12vw] border border-2 flex justify-center items-center",
         content: "h-[12vw] w-[20vw] border border-2 flex justify-center items-center",
-        name: "h-[4vw] w-[32vw] border border-2 flex items-center"
+        name: "h-[4vw] w-[32vw] border border-2 flex items-center",
+        center: "flex justify-center items-center flex-1"
     }
     
     
-    const onWheelMove = (deltaY, val) => {
-        console.log("wwheeeele !!!")
-        console.log(deltaY, val)
-        return deltaY === 0 ? 0 : ( deltaY > 0 ? parseInt(val, 10)-1 : parseInt(val)+1 )
-    }
     
-    function handleWheel(e, side, currentIndex, max, currentSetter, updater) {
-        //console.log("handle wheel")
-        console.log(side, currentIndex)
     
-        if (validateSide(side)) {
-            currentSetter(Math.max(Math.min(onWheelMove(e.deltaY, currentIndex), max), 0));
-            //updater();
-        }
-    }
+    
+    
     
     return (
         <>
             <div className={"flex flex-row flex-wrap justify-between"}>
-                <div className={`${style.leftPanel} ${center}`}>
+                <div className={`${style.leftPanel} ${style.center}`}>
                     <p onClick={() => !updating && onFontUpdate("Left")}>
                         {font.Left.name || "select css file"}
                     </p>
                 </div>
-                <div className={`${style.rightPanel} ${center}`}>
+                <div className={`${style.rightPanel} ${style.center}`}>
                     <p onClick={() => !updating && onFontUpdate("Right")}>
                         {font.Right.name || "select css file"}
                     </p>
                 </div>
             </div>
-            
-            
+    
+    
             <div className={"flex flex-row flex-wrap justify-between"}>
+                {font.Left.orderedListOfContent[0] &&
+                <HalfLine side={"Left"} style={style} font={font} cmd={cmd} setCmd={setCmd} contentIndex={contentIndex}
+                    glyphIndex={glyphIndex} setContentIndex={setContentIndex} setGlyphIndex={setGlyphIndex} setter={setter}
+                    updateGlyphIndex={updateGlyphIndex} updateContentIndex={updateContentIndex}
+                />
+                }
+        
+                {font.Right.orderedListOfContent[0] &&
+                <HalfLine side={"Right"} style={style} font={font} cmd={cmd} setCmd={setCmd} contentIndex={contentIndex}
+                    glyphIndex={glyphIndex} setContentIndex={setContentIndex} setGlyphIndex={setGlyphIndex} setter={setter}
+                    updateGlyphIndex={updateGlyphIndex} updateContentIndex={updateContentIndex}
+                />
+                }
+            </div>
+            
+        </>
+    )
+}
+
+// OLD version
+
+
+{/*            <div className={"flex flex-row flex-wrap justify-between none"}>
                 {font.Left.orderedListOfContent[0] &&
                 <div className={style.leftPanel}>
                     <div id={"left-side"} className={style.block}>
@@ -2049,7 +2062,7 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
                         </div>
                     </div>
                 </div> }
-    
+        
                 {font.Right.orderedListOfContent[0] &&
                 <div className={style.rightPanel}>
                     <div id={"right-side"} className={style.block}>
@@ -2068,7 +2081,7 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
                                              //updateGlyphIndex("Right", font, contentIndex, setGlyphIndex);
                                          }
                                      }}
-                
+                        
                                 >
                                 <span>{font.Right.orderedListOfContent[0] && (
                                     cmd.Right === "content" && Object.keys(JSON.parse(font.Right.orderedListOfContent[contentIndex.Right]))[0] ||
@@ -2111,7 +2124,4 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
                 </div>
                 }
             </div>
-        </>
-    )
-}
-
+   */}
