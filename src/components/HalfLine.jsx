@@ -24,21 +24,28 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
     return (
         <div className={side === "Left" ? style.leftPanel : style.rightPanel}>
             <div className={style.block}>
-                <UpDown side={side}
-                        index={cmd[side] === "content" ? contentIndex[side] : glyphIndex[side]}
-                        setIndex={cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side]}
-                        max={font[side].orderedListOfContent.length - 1}
-                        onWheel={(e) => {
-                            let index = cmd[side] === "content" ? contentIndex[side] : glyphIndex[side];
-                            let setIndex = cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side];
-                            let max = font[side].orderedListOfContent.length - 1;
-                            cmd[side] === "content" ?
-                                handleWheel(e, side, index, max, setIndex, () => updateGlyphIndex(side, font, contentIndex, setGlyphIndex)) :
-                                handleWheel(e, side, index, max, setIndex, () => updateContentIndex(side, font, glyphIndex, setContentIndex))
-                        }}
-                />
+                {side === "Left" ? <UpDown side={side}
+                                           index={cmd[side] === "content" ? contentIndex[side] : glyphIndex[side]}
+                                           setIndex={cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side]}
+                                           max={font[side].orderedListOfContent.length - 1}
+                                           onWheel={(e) => {
+                                               let index = cmd[side] === "content" ? contentIndex[side] : glyphIndex[side];
+                                               let setIndex = cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side];
+                                               let max = font[side].orderedListOfContent.length - 1;
+                                               cmd[side] === "content" ?
+                                                   handleWheel(e, side, index, max, setIndex, () => updateGlyphIndex(side, font, contentIndex, setGlyphIndex)) :
+                                                   handleWheel(e, side, index, max, setIndex, () => updateContentIndex(side, font, glyphIndex, setContentIndex))
+                                           }}
+                /> : null }
+                
                 <div>
                     <div className={"flex flex-row"}>
+                        {side === "Right" ?
+                            <div className={style.ico}>
+                                {font[side].orderedListOfContent[0] &&
+                                <span className={`ico_${Object.keys(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0]} font-${side} text-8xl`}/>
+                                }
+                            </div> : null }
                         <div className={style.content}
                              onClick={() => {
                                  if (cmd[side] !== "content") {
@@ -52,11 +59,12 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                                     cmd[side] === "glyph" && Object.values(JSON.parse(font[side].orderedListOfGlyph[glyphIndex[side]]))[0]
                                 )}</span>
                         </div>
-                        <div className={style.ico}>
-                            {font[side].orderedListOfContent[0] &&
-                            <span className={`ico_${Object.keys(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0]} font-${side} text-8xl`}/>
-                            }
-                        </div>
+                        {side === "Left" ?
+                            <div className={style.ico}>
+                                {font[side].orderedListOfContent[0] &&
+                                <span className={`ico_${Object.keys(JSON.parse(font[side].orderedListOfContent[contentIndex[side]]))[0]} font-${side} text-8xl`}/>
+                                }
+                            </div> : null }
                     </div>
                     <div className={style.name}
                          onClick={() => {
@@ -72,6 +80,20 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                             )}</span>
                     </div>
                 </div>
+                
+                {side === "Right" ? <UpDown side={side}
+                                           index={cmd[side] === "content" ? contentIndex[side] : glyphIndex[side]}
+                                           setIndex={cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side]}
+                                           max={font[side].orderedListOfContent.length - 1}
+                                           onWheel={(e) => {
+                                               let index = cmd[side] === "content" ? contentIndex[side] : glyphIndex[side];
+                                               let setIndex = cmd[side] === "content" ? setContentIndex[side] : setGlyphIndex[side];
+                                               let max = font[side].orderedListOfContent.length - 1;
+                                               cmd[side] === "content" ?
+                                                   handleWheel(e, side, index, max, setIndex, () => updateGlyphIndex(side, font, contentIndex, setGlyphIndex)) :
+                                                   handleWheel(e, side, index, max, setIndex, () => updateContentIndex(side, font, glyphIndex, setContentIndex))
+                                           }}
+                /> : null }
             </div>
         </div>
     )
