@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './fonts/icoToContent.css'
+import './fonts/leftSideContent.css'
+import './fonts/rightSideContent.css'
 import './main.css'
 import CompLine from "./components/CompLine";
 import {updateFont} from "./assets/utils/utils";

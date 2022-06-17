@@ -25,24 +25,43 @@ body {
 }
 
 
+/*
+
+    TOUT CE QUI SE TROUVE DESSOUS DOIT DISPARAITRE OU ETRE COMPATIBLE AVEC N'IMPORTE
+    QUEL FICHIER CSS ET FONTS
+
+*/
+
 @font-face {
-  font-family: 'icomoon';
-  src: url(./fonts/icomoon.ttf) format('truetype'),
-  url("./fonts/icomoon.woff") format('woff')
+  /*font-family: 'icomoon';*/
+  /*src: url(./fonts/icomoon.ttf) format('truetype'),*/
+  /*url("./fonts/icomoon.woff") format('woff')*/
+
+  font-family: 'Left';
+  src: url(./fonts/leftsidefont.ttf) format('truetype'),
+  url("./fonts/leftsidefont.woff") format('woff')
+
 }
 
 @font-face {
-  font-family: 'lineficon';
-  src: url(./fonts/lineficon.ttf) format('truetype'),
-  url('./fonts/lineficon.woff') format('woff')
+  /*font-family: 'lineficon';*/
+  /*src: url(./fonts/lineficon.ttf) format('truetype'),*/
+  /*url('./fonts/lineficon.woff') format('woff')*/
+
+  font-family: 'Right';
+  src: url(./fonts/rightsidefont.ttf) format('truetype'),
+  url("./fonts/rightsidefont.woff") format('woff')
+
 }
 
 .font-Left::before {
-  font-family: 'icomoon' !important;
+  /*font-family: 'icomoon' !important;*/
+  font-family: 'Left' !important;
   display: block;
 }
 
 .font-Right::before {
-  font-family: 'lineficon' !important;
+  /*font-family: 'lineficon' !important;*/
+  font-family: 'Right' !important;
   display: block;
 }
