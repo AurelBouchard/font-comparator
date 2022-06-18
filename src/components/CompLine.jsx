@@ -1954,10 +1954,9 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
         block: "border border-1 sm:border-2 flex flex-row",
         ico: "h-[12vw] w-[12vw] border border-1 sm:border-2 flex justify-center items-center",
         content: "h-[12vw] w-[20vw] border border-1 sm:border-2 flex justify-center items-center",
-        name: "h-[4vw] w-[32vw] border border-1 sm:border-2 flex items-center",
+        name: "h-[4vw] w-[32vw] border border-1 sm:border-2 flex items-center pl-[2vw]",
         center: "flex justify-center items-center flex-1",
         btn: "h-[8vw] w-[8vw] border border-1 sm:border-2 flex justify-center items-center"
-    
     }
     
     

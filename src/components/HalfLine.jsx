@@ -37,6 +37,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                                                    handleWheel(e, side, index, max, setIndex, () => updateContentIndex(side, font, glyphIndex, setContentIndex))
                                            }}
                                            style={style.btn}
+                                           arrowPos={cmd[side]}
                 /> : null }
                 
                 <div>
@@ -95,6 +96,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                                                    handleWheel(e, side, index, max, setIndex, () => updateContentIndex(side, font, glyphIndex, setContentIndex))
                                            }}
                                             style={style.btn}
+                                            arrowPos={cmd[side]}
                 /> : null }
             </div>
         </div>

@@ -24,6 +24,26 @@ body {
   font-size: 7vw;
 }
 
+.arrow-Left {
+  height:0;
+  width: 0;
+  border-left : solid 1.2vw;
+  border-top : transparent solid 2vw;
+  border-bottom : transparent solid 2vw;
+}
+
+.arrow-Right {
+  height:0;
+  width: 0;
+  border-right : solid 1.2vw;
+  border-top : transparent solid 2vw;
+  border-bottom : transparent solid 2vw;
+}
+
+
+
+
+
 
 /*
 
