@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import UpDown from "./UpDown";
 import {validateSide} from "../assets/utils/utils";
 import HalfLine from "./HalfLine";
+import FileSelector from "./FileSelector";
 
 
 
-export default function CompLine({font, setter, contentIndex, setContentIndex, glyphIndex, setGlyphIndex, cmd, setCmd}) {
+export default function CompLine({font, setter, contentIndex, setContentIndex, glyphIndex, setGlyphIndex, cmd, setCmd, file, setFile}) {
     const [updating, setUpdating] = useState(false)
     
     const updateGlyphIndex = (side, font, contentIndex, setGlyphIndex) => {
@@ -1961,22 +1962,27 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
     
     
     
-    
-    
-    
-    
     return (
         <>
             <div className={"flex flex-row flex-wrap justify-between"}>
-                <div className={`${style.leftPanel} ${style.center}`}>
-                    <p onClick={() => !updating && onFontUpdate("Left")}>
-                        {font.Left.name || "select css file"}
-                    </p>
-                </div>
+                <FileSelector side={"Left"} style={style}
+                              font={font} setter={setter}
+                              file={file} setFile={setFile}
+                              updating={updating} onFontUpdate={onFontUpdate}/>
+                
                 <div className={`${style.rightPanel} ${style.center}`}>
-                    <p onClick={() => !updating && onFontUpdate("Right")}>
-                        {font.Right.name || "select css file"}
-                    </p>
+                    {/*<p onClick={() => !updating && onFontUpdate("Right")}>*/}
+                    {/*    {font.Right.name || "select css file"}*/}
+                    {/*</p>*/}
+                    <div>
+                        {/*<span>Right font</span>*/}
+                        <label htmlFor="rightsidefile" className={"text-[2vw]"}>
+                            <input type="file" id="rightsidefile" name="rightsidefile"
+                                   className={"file:w-[3vw] file:text-transparent"}
+                                   onInput={() => !updating && onFontUpdate("Right")}
+                            />
+                        </label>
+                    </div>
                 </div>
             </div>
     

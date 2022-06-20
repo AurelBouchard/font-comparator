@@ -13,7 +13,7 @@ body {
   background-color: #282c34;
   font-size: 3vw;
 
-  font-family: Carlito;
+  font-family: Waree;
 }
 
 .glyph-name {
@@ -27,7 +27,7 @@ body {
 .arrow-Left {
   height:0;
   width: 0;
-  border-left : solid 1.2vw;
+  border-left : solid 1.4vw;
   border-top : transparent solid 2vw;
   border-bottom : transparent solid 2vw;
 }
@@ -35,7 +35,7 @@ body {
 .arrow-Right {
   height:0;
   width: 0;
-  border-right : solid 1.2vw;
+  border-right : solid 1.4vw;
   border-top : transparent solid 2vw;
   border-bottom : transparent solid 2vw;
 }
@@ -77,11 +77,11 @@ body {
 .font-Left::before {
   /*font-family: 'icomoon' !important;*/
   font-family: 'Left' !important;
-  display: block;
+  /*display: block;*/
 }
 
 .font-Right::before {
   /*font-family: 'lineficon' !important;*/
   font-family: 'Right' !important;
-  display: block;
+  /*display: block;*/
 }

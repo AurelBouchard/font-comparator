@@ -82,7 +82,7 @@ function App() {
 
   return (
     <div className="App box-content">
-      <header className="App-header mt-8 mb-18">
+      <header className="App-header mt-[1.5vw] mb-[5vw]">
         Font Comparator
       </header>
         <main>
@@ -95,6 +95,8 @@ function App() {
                 setContentIndex={setContentIndex}
                 cmd={cmd}
                 setCmd={setCmd}
+                file={file}
+                setFile={setFile}
             />
         </main>
     </div>

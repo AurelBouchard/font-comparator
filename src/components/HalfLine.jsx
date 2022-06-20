@@ -40,7 +40,7 @@ export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,co
                                            arrowPos={cmd[side]}
                 /> : null }
                 
-                <div>
+                <div className={"cursor-default"}>
                     <div className={"flex flex-row"}>
                         {side === "Right" ?
                             <div className={style.ico}>
