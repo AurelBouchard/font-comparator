@@ -21,7 +21,6 @@ function App() {
     }
 
     // LEFT
-    const [cssFileLeft, setCssFileLeft] = useState(null)
     const [left, setLeft] = useState(emptyFont)
     const [contentIndexLeft, setContentIndexLeft] = useState(0)
     const [glyphIndexLeft, setGlyphIndexLeft] = useState(0)
@@ -29,7 +28,6 @@ function App() {
 
     
     // RIGHT
-    const [cssFileRight, setCssFileRight] = useState(null)
     const [right, setRight] = useState(emptyFont)
     const [contentIndexRight, setContentIndexRight] = useState(0)
     const [glyphIndexRight, setGlyphIndexRight] = useState(0)
@@ -37,14 +35,6 @@ function App() {
     
     
     // shortcut
-    const file =            {
-        Left: cssFileLeft,
-        Right: cssFileRight
-    }
-    const setFile =         {
-        Left: setCssFileLeft,
-        Right: setCssFileRight
-    }
     const font =            {
         Left: left,
         Right: right
@@ -95,8 +85,6 @@ function App() {
                 setContentIndex={setContentIndex}
                 cmd={cmd}
                 setCmd={setCmd}
-                file={file}
-                setFile={setFile}
             />
         </main>
     </div>

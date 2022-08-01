@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import UpDown from "./UpDown";
 import {validateSide} from "../assets/utils/utils";
 import HalfLine from "./HalfLine";
-import FileSelector from "./FileSelector";
 
 
 
-export default function CompLine({font, setter, contentIndex, setContentIndex, glyphIndex, setGlyphIndex, cmd, setCmd, file, setFile}) {
+export default function CompLine({font, setter, contentIndex, setContentIndex, glyphIndex, setGlyphIndex, cmd, setCmd }) {
     const [updating, setUpdating] = useState(false)
     
     const updateGlyphIndex = (side, font, contentIndex, setGlyphIndex) => {
@@ -1968,175 +1966,28 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
         btn: "h-[8vw] w-[8vw] border border-1 sm:border-2 flex justify-center items-center"
     }
     
+    useEffect(()=> {
+        onFontUpdate("Left").then(()=>console.log("Left side ok"));
+        onFontUpdate("Right").then(()=>console.log("Right side ok"));
+    }, [])
     
     
     return (
-        <>
-            <div className={"flex flex-row flex-wrap justify-between"}>
-                <FileSelector side={"Left"} style={style}
-                              font={font} setter={setter}
-                              file={file} setFile={setFile}
-                              updating={updating} onFontUpdate={onFontUpdate}/>
-                
-                <div className={`${style.rightPanel} ${style.center}`}>
-                    {/*<p onClick={() => !updating && onFontUpdate("Right")}>*/}
-                    {/*    {font.Right.name || "select css file"}*/}
-                    {/*</p>*/}
-                    <div>
-                        {/*<span>Right font</span>*/}
-                        <label htmlFor="rightsidefile" className={"text-[2vw]"}>
-                            <input type="file" id="rightsidefile" name="rightsidefile"
-                                   className={"file:w-[3vw] file:text-transparent"}
-                                   onInput={() => !updating && onFontUpdate("Right")}
-                            />
-                        </label>
-                    </div>
-                </div>
-            </div>
     
+        <div className={"flex flex-row flex-wrap justify-between"}>
+            {font.Left.orderedListOfContent[0] &&
+            <HalfLine side={"Left"} style={style} font={font} cmd={cmd} setCmd={setCmd} contentIndex={contentIndex}
+                glyphIndex={glyphIndex} setContentIndex={setContentIndex} setGlyphIndex={setGlyphIndex} setter={setter}
+                updateGlyphIndex={updateGlyphIndex} updateContentIndex={updateContentIndex}
+            />
+            }
     
-            <div className={"flex flex-row flex-wrap justify-between"}>
-                {font.Left.orderedListOfContent[0] &&
-                <HalfLine side={"Left"} style={style} font={font} cmd={cmd} setCmd={setCmd} contentIndex={contentIndex}
-                    glyphIndex={glyphIndex} setContentIndex={setContentIndex} setGlyphIndex={setGlyphIndex} setter={setter}
-                    updateGlyphIndex={updateGlyphIndex} updateContentIndex={updateContentIndex}
-                />
-                }
-        
-                {font.Right.orderedListOfContent[0] &&
-                <HalfLine side={"Right"} style={style} font={font} cmd={cmd} setCmd={setCmd} contentIndex={contentIndex}
-                    glyphIndex={glyphIndex} setContentIndex={setContentIndex} setGlyphIndex={setGlyphIndex} setter={setter}
-                    updateGlyphIndex={updateGlyphIndex} updateContentIndex={updateContentIndex}
-                />
-                }
-            </div>
-            
-        </>
+            {font.Right.orderedListOfContent[0] &&
+            <HalfLine side={"Right"} style={style} font={font} cmd={cmd} setCmd={setCmd} contentIndex={contentIndex}
+                glyphIndex={glyphIndex} setContentIndex={setContentIndex} setGlyphIndex={setGlyphIndex} setter={setter}
+                updateGlyphIndex={updateGlyphIndex} updateContentIndex={updateContentIndex}
+            />
+            }
+        </div>
     )
 }
-
-// OLD version
-
-
-{/*            <div className={"flex flex-row flex-wrap justify-between none"}>
-                {font.Left.orderedListOfContent[0] &&
-                <div className={style.leftPanel}>
-                    <div id={"left-side"} className={style.block}>
-                        <UpDown side={"Left"}
-                                index={cmd.Left === "content" ? contentIndex.Left : glyphIndex.Left}
-                                setIndex={cmd.Left === "content" ? setContentIndex.Left : setGlyphIndex.Left}
-                                max={font.Left.orderedListOfContent.length - 1}
-                                onClick={() => {
-                                    //cmd.Left === "content" ? updateGlyphIndex("Left", font, contentIndex, setGlyphIndex) : updateContentIndex("Left", font, glyphIndex, setContentIndex)
-                                }}
-                                onWheel={(e) => {
-                                    let index = cmd.Left === "content" ? contentIndex.Left : glyphIndex.Left;
-                                    let setIndex = cmd.Left === "content" ? setContentIndex.Left : setGlyphIndex.Left;
-                                    let max = font.Left.orderedListOfContent.length - 1;
-                                    cmd.Left === "content" ?
-                                        handleWheel(e, "Left", index, max, setIndex, () => updateGlyphIndex("Left", font, contentIndex, setGlyphIndex)) :
-                                        handleWheel(e, "Left", index, max, setIndex, () => updateContentIndex("Left", font, glyphIndex, setContentIndex))
-                                }}
-                        />
-                        <div>
-                            <div className={"flex flex-row"}>
-                                <div className={style.content}
-                                     onClick={() => {
-                                         if (cmd.Left !== "content") {
-                                             console.log("content on left")
-                                             setCmd.Left("content");
-                                             //updateGlyphIndex("Left", font, contentIndex, setGlyphIndex);
-                                         }
-                                     }}
-                                >
-                                <span>{font.Left.orderedListOfContent[0] && (
-                                    cmd.Left === "content" && Object.keys(JSON.parse(font.Left.orderedListOfContent[contentIndex.Left]))[0] ||
-                                    cmd.Left === "glyph" && Object.values(JSON.parse(font.Left.orderedListOfGlyph[glyphIndex.Left]))[0]
-                                )}</span>
-                                </div>
-                                <div className={style.ico}>
-                                    {font.Left.orderedListOfContent[0] &&
-                                    <span className={`ico_${Object.keys(JSON.parse(font.Left.orderedListOfContent[contentIndex.Left]))[0]} font-left text-8xl`}/>
-                                    }
-                                </div>
-                            </div>
-                            <div className={style.name}
-                                 onClick={() => {
-                                     if (cmd.Left !== "glyph") {
-                                         console.log("glyph on left")
-                                         setCmd.Left("glyph");
-                                         //updateContentIndex("Left", font, glyphIndex, setContentIndex);
-                                     }
-                                 }}
-                            >
-                            <span>{font.Left.orderedListOfGlyph[0] && (
-                                cmd.Left === "content" && Object.values(JSON.parse(font.Left.orderedListOfContent[contentIndex.Left]))[0] ||
-                                cmd.Left === "glyph" && Object.keys(JSON.parse(font.Left.orderedListOfGlyph[glyphIndex.Left]))[0]
-                            )}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div> }
-        
-                {font.Right.orderedListOfContent[0] &&
-                <div className={style.rightPanel}>
-                    <div id={"right-side"} className={style.block}>
-                        <div>
-                            <div className={"flex flex-row"}>
-                                <div className={style.ico}>
-                                    {font.Right.orderedListOfContent[0] &&
-                                    <span className={`ico_${Object.keys(JSON.parse(font.Right.orderedListOfContent[contentIndex.Right]))[0]} font-right text-8xl`}/>
-                                    }
-                                </div>
-                                <div className={style.content}
-                                     onClick={() => {
-                                         if (cmd.Right !== "content") {
-                                             console.log("content on right")
-                                             setCmd.Right("content");
-                                             //updateGlyphIndex("Right", font, contentIndex, setGlyphIndex);
-                                         }
-                                     }}
-                        
-                                >
-                                <span>{font.Right.orderedListOfContent[0] && (
-                                    cmd.Right === "content" && Object.keys(JSON.parse(font.Right.orderedListOfContent[contentIndex.Right]))[0] ||
-                                    cmd.Right === "glyph" && Object.values(JSON.parse(font.Right.orderedListOfGlyph[glyphIndex.Right]))[0]
-                                )}</span>
-                                </div>
-                            </div>
-                            <div className={style.name}
-                                 onClick={() => {
-                                     if (cmd.Right !== "glyph") {
-                                         console.log("glyph on right")
-                                         setCmd.Right("glyph");
-                                         //updateContentIndex("Left", font, glyphIndex, setContentIndex);
-                                     }
-                                 }}
-                            >
-                            <span>{font.Right.orderedListOfGlyph[0] && (
-                                cmd.Right === "content" && Object.values(JSON.parse(font.Right.orderedListOfContent[contentIndex.Right]))[0] ||
-                                cmd.Right === "glyph" && Object.keys(JSON.parse(font.Right.orderedListOfGlyph[glyphIndex.Right]))[0]
-                            )}</span>
-                            </div>
-                        </div>
-                        <UpDown side={"Right"}
-                                index={cmd.Right === "content" ? contentIndex.Right : glyphIndex.Right}
-                                setIndex={cmd.Right === "content" ? setContentIndex.Right : setGlyphIndex.Right}
-                                max={font.Right.orderedListOfContent.length - 1}
-                                onClick={() => {
-                                    //cmd.Right === "content" ? updateGlyphIndex("Right", font, contentIndex, setGlyphIndex) : updateContentIndex("Right", font, glyphIndex, setContentIndex)
-                                }}
-                                onWheel={(e) => {
-                                    let index = cmd.Right === "content" ? contentIndex.Right : glyphIndex.Right;
-                                    let setIndex = cmd.Right === "content" ? setContentIndex.Right : setGlyphIndex.Right;
-                                    let max = font.Right.orderedListOfContent.length - 1;
-                                    cmd.Right === "content" ?
-                                        handleWheel(e, "Right", index, max, setIndex, () => updateGlyphIndex("Right", font, contentIndex, setGlyphIndex)) :
-                                        handleWheel(e, "Right", index, max, setIndex, () => updateContentIndex("Right", font, glyphIndex, setContentIndex))
-                                }}
-                        />
-                    </div>
-                </div>
-                }
-            </div>
-   */}
