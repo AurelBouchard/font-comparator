@@ -39,23 +39,31 @@ export default function CompLine({font, setter, contentIndex, setContentIndex, g
     
     
     useEffect(() => {
-        console.log("Left glyphIndex :", glyphIndex.Left)
-        updateContentIndex("Left", font, glyphIndex, setContentIndex)
+        if (font["Left"].orderedListOfGlyph[0]) {
+            console.log("Left glyphIndex :", glyphIndex.Left)
+            updateContentIndex("Left", font, glyphIndex, setContentIndex)
+        }
     }, [glyphIndex.Left])
     
     useEffect(() => {
-        console.log("Right glyphIndex :", glyphIndex.Right)
-        updateContentIndex("Right", font, glyphIndex, setContentIndex)
+        if (font["Right"].orderedListOfGlyph[0]) {
+            console.log("Right glyphIndex :", glyphIndex.Right)
+            updateContentIndex("Right", font, glyphIndex, setContentIndex)
+        }
     }, [glyphIndex.Right])
     
     useEffect(() => {
-        console.log("Left contentIndex :", contentIndex.Left)
-        updateGlyphIndex("Left", font, contentIndex, setGlyphIndex)
+        if (font["Left"].orderedListOfGlyph[0]) {
+            console.log("Left contentIndex :", contentIndex.Left)
+            updateGlyphIndex("Left", font, contentIndex, setGlyphIndex)
+        }
     }, [contentIndex.Left])
     
     useEffect(() => {
-        console.log("Right contentIndex :", contentIndex.Right)
-        updateGlyphIndex("Right", font, contentIndex, setGlyphIndex)
+        if (font["Right"].orderedListOfGlyph[0]) {
+            console.log("Right contentIndex :", contentIndex.Right)
+            updateGlyphIndex("Right", font, contentIndex, setGlyphIndex)
+        }
     }, [contentIndex.Right])
     
     

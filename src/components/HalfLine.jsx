@@ -1,10 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import UpDown from "./UpDown";
 import {validateSide} from "../assets/utils/utils";
 
 export default function HalfLine({ style, side, font,glyphIndex,setGlyphIndex,contentIndex,setContentIndex,cmd,setCmd, updateGlyphIndex, updateContentIndex}) {
     
     
+    useEffect(() => {
+        console.log("Initial update with left contentIndex :", contentIndex.Left)
+        updateGlyphIndex("Left", font, contentIndex, setGlyphIndex)
+    }, [])
+    
+    useEffect(() => {
+        console.log("Initial update with  right contentIndex :", contentIndex.Right)
+        updateGlyphIndex("Right", font, contentIndex, setGlyphIndex)
+    }, [])
     
     const onWheelMove = (deltaY, val) => {
         console.log("wwheeeele !!!")

@@ -21,7 +21,7 @@ export default function UpDown({side, index, setIndex, max, onClick, onWheel, st
                     </div>
                 </div>
                 <div className={`absolute transition-all ${arrowPos === "glyph" ? "top-[12vw]" : "top-[4vw]"}`}>
-                    <div className={`absolute ${side === "Left" ? "left-[8vw]" : "right-0"} arrow-${side}`} ></div>
+                    <div className={`absolute ${side === "Left" ? "left-[8vw]" : "right-0"} arrow-${side}`} />
                 </div>
             </div>
     )
